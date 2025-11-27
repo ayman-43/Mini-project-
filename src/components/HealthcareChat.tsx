@@ -404,7 +404,7 @@ const HealthcareChat = () => {
   // Voice input functionality
   const startVoiceInput = () => {
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-      alert('Speech recognition is not supported in your browser.');
+      alert('Speech recognition is not supported in your browser. Please use Chrome, Edge, or Safari.');
       return;
     }
 
@@ -417,10 +417,25 @@ const HealthcareChat = () => {
       recognition.interimResults = true;
       recognition.lang = 'en-US';
 
-      recognition.onstart = () => setIsListening(true);
+      recognition.onstart = () => {
+        console.log('Voice recognition started');
+        setIsListening(true);
+      };
+
       recognition.onend = () => {
+        console.log('Voice recognition ended');
         setIsListening(false);
         setInterimText('');
+        recognitionRef.current = null; // Clear the ref so we can start again
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error('Speech recognition error', event.error);
+        setIsListening(false);
+        recognitionRef.current = null;
+        if (event.error === 'not-allowed') {
+          alert('Microphone access denied. Please enable microphone permissions in your browser settings.');
+        }
       };
 
       recognition.onresult = (event: any) => {
