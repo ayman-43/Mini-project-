@@ -1,0 +1,184 @@
+/* Login.css */
+.login-body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    width: 100vw;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+spline-viewer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+spline-viewer::part(footer) {
+    display: none !important;
+}
+
+.speech-bubble {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: gray;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 20px;
+    font-size: 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    z-index: 2;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.1) transparent transparent transparent;
+}
+
+.panel-container {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 340px;
+    perspective: 1000px;
+    z-index: 3;
+}
+
+.panel-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+
+.panel-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.login-panel,
+.signup-panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.signup-panel {
+    transform: rotateY(180deg);
+}
+
+.login-panel input,
+.signup-panel input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.login-panel input::placeholder,
+.signup-panel input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.login-panel input:focus,
+.signup-panel input:focus {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+}
+
+.login-btn, .signup-btn, .google-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+}
+
+.login-btn:hover, .signup-btn:hover, .google-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.google-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.switch-link {
+    color: #0ff;
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
+.output-msg {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #0ff;
+    text-align: center;
+}
+
+@media(max-width: 600px) {
+    .panel-container {
+        width: 85%;
+        height: 330px;
+    }
+
+    .speech-bubble {
+        width: 80%;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asha - Login / Signup</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+
+    <style>
+        /* --- SAME CSS AS YOUR ORIGINAL CODE --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            height: 100vh;
+            width: 100vw;
+            background: #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        spline-viewer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        spline-viewer::part(footer) {
+            display: none !important;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: gray;
+            color: black;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            z-index: 2;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.1) transparent transparent transparent;
+        }
+
+        .panel-container {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 340px;
+            perspective: 1000px;
+            z-index: 3;
+        }
+
+        .panel-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .panel-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .login-panel,
+        .signup-panel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+        }
+
+        .signup-panel {
+            transform: rotateY(180deg);
+        }
+
+        .login-panel input,
+        .signup-panel input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-panel input::placeholder,
+        .signup-panel input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .login-panel input:focus,
+        .signup-panel input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        #googleLogin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #googleLogin img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .switch-link {
+            color: #0ff;
+            margin-top: 10px;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 13px;
+        }
+
+        #loginOutput,
+        #signupOutput {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #0ff;
+            text-align: center;
+        }
+
+        @media(max-width: 600px) {
+            .panel-container {
+                width: 85%;
+                height: 330px;
+            }
+
+            .speech-bubble {
+                width: 80%;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 3D Robot -->
+    <spline-viewer url="https://prod.spline.design/FQwKaGRElAQqSbhj/scene.splinecode"></spline-viewer>
+
+    <div class="speech-bubble">
+        💬 Hey!! I am your compounder allow me to take you to the Doctor 😈💉
+    </div>
+
+    <!-- Login/Signup Container -->
+    <div class="panel-container">
+        <div class="panel-inner" id="flipCard">
+
+            <!-- Login Panel -->
+            <div class="login-panel">
+                <input type="email" id="email" placeholder="Email">
+                <input type="password" id="password" placeholder="Password">
+                <button id="loginBtn">Login</button>
+                <button id="googleLogin">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Logo"> Login with Google
+                </button>
+                <p class="switch-link" id="toSignup">Don't have an account? Sign Up</p>
+                <p id="loginOutput"></p>
+            </div>
+
+            <!-- Signup Panel -->
+            <div class="signup-panel">
+                <input type="email" id="signupEmail" placeholder="Email">
+                <input type="password" id="signupPassword" placeholder="Password">
+                <button id="signupBtn">Sign Up</button>
+                <p class="switch-link" id="toLogin">Already have an account? Login</p>
+                <p id="signupOutput"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+        /* ---------------------------
+           🔐 YOUR SUPABASE CONFIG
+        ---------------------------- */
+        const SUPABASE_URL = "https://esdvpdjwibaqjdwiikbg.supabase.co";       // ← Replace
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzZHZwZGp3aWJhcWpkd2lpa2JnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQxNzM3MTIsImV4cCI6MjA3OTc0OTcxMn0.6m18MeSHeTRk2ZwHoOESyvovWIR_EDHAhTiKX2RSqv0";    // ← Replace
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        /* ---------------------------
+           UI ELEMENTS
+        ---------------------------- */
+        const flipCard = document.getElementById('flipCard');
+        const toSignup = document.getElementById('toSignup');
+        const toLogin = document.getElementById('toLogin');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const googleLogin = document.getElementById('googleLogin');
+        const loginOutput = document.getElementById('loginOutput');
+        const signupOutput = document.getElementById('signupOutput');
+
+        /* Flip animations */
+        toSignup.addEventListener('click', () => flipCard.classList.add('flipped'));
+        toLogin.addEventListener('click', () => flipCard.classList.remove('flipped'));
+
+        /* ---------------------------
+           EMAIL LOGIN
+        ---------------------------- */
+        loginBtn.addEventListener("click", async () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (!email || !password) {
+                loginOutput.textContent = "⚠ Please fill both fields.";
+                return;
+            }
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email, password
+            });
+
+            if (error) {
+                loginOutput.textContent = "❌ " + error.message;
+            } else {
+                loginOutput.textContent = "✅ Logged in! Redirecting...";
+                setTimeout(() => window.location.href = "/", 1200);
+            }
+        });
+
+        /* ---------------------------
+           SIGNUP
+        ---------------------------- */
+        signupBtn.addEventListener("click", async () => {
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+
+            if (!email || !password) {
+                signupOutput.textContent = "⚠ Please fill both fields.";
+                return;
+            }
+
+            const { data, error } = await supabase.auth.signUp({
+                email, password
+            });
+
+            if (error) {
+                signupOutput.textContent = "❌ " + error.message;
+            } else {
+                signupOutput.textContent = "✅ Signup successful! Verify your email.";
+                setTimeout(() => flipCard.classList.remove('flipped'), 1500);
+            }
+        });
+
+        /* ---------------------------
+           GOOGLE LOGIN
+        ---------------------------- */
+        googleLogin.addEventListener("click", async () => {
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: "google",
+                options: { redirectTo: window.location.origin + "/" }
+            });
+
+            if (error) console.log(error);
+        });
+    </script>
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.77/build/spline-viewer.js" async></script>
+
+</body>
+
+</html>
