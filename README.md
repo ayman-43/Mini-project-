@@ -71,19 +71,9 @@ We're excited to participate in Hacktoberfest 2025! This is the perfect opportun
 - **Quality code**: Follows project conventions and best practices
 - **Meaningful**: Adds real value to the project and its users
 
-### 🚀 **Quick Start for Hacktoberfest Contributors**
 
-1. **⭐ Star the repo** - [Click here](https://github.com/NikhilRaikwar/HealthAI-Assistant) (MANDATORY!)
-2. **Find an issue** - Check our [Good First Issues](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) or [Hacktoberfest](https://github.com/NikhilRaikwar/HealthAI-Assistant/issues?q=is%3Aopen+is%3Aissue+label%3AHacktoberfest) labeled issues
-3. **Comment on the issue** - Express your interest: "I'd like to work on this"
-4. **Wait for assignment** - Maintainers will assign the issue to you
-5. **Fork the repo** - Click the 'Fork' button at the top right
-6. **Create your branch** - Use descriptive names: `git checkout -b feature/your-feature-name`
-7. **Make your changes** - Follow our [contribution guidelines](./CONTRIBUTING.md)
-8. **Add yourself to CONTRIBUTORS.md** - Celebrate your contribution!
-9. **Submit a PR** - Create a pull request and our maintainers will review it
 
----
+
 
 ## ✨ Key Features
 
@@ -121,10 +111,6 @@ We're excited to participate in Hacktoberfest 2025! This is the perfect opportun
 - 📘 **TypeScript** - Type safety
 
 ---
-
-## 🚀 Live Demo
-
-Visit the live application: **[HealthAI Assistant](https://health-ai-assistant.vercel.app/)**
 
 ---
 
@@ -419,11 +405,7 @@ npm run format
 
 ---
 
-## 📧 Contact
 
-**Maintainer**: Nikhil Raikwar  
-**GitHub**: [@NikhilRaikwar](https://github.com/NikhilRaikwar)  
-**Project Link**: [https://github.com/NikhilRaikwar/HealthAI-Assistant](https://github.com/NikhilRaikwar/HealthAI-Assistant)
 
 ---
 
@@ -435,9 +417,7 @@ npm run format
 
 ---
 
-## 🎉 Hacktoberfest 2025 Special
 
-We're thrilled to be part of Hacktoberfest 2025! Here's what makes our project great for contributors:
 
 ### 🏆 Why Contribute to HealthAI Assistant?
 
@@ -502,42 +482,21 @@ We love our contributors! All contributors are shown below with their GitHub pro
 
 ---
 
-## 📊 Project Stats
-
-<div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/NikhilRaikwar/HealthAI-Assistant?style=social)
-![GitHub forks](https://img.shields.io/github/forks/NikhilRaikwar/HealthAI-Assistant?style=social)
-![GitHub issues](https://img.shields.io/github/issues/NikhilRaikwar/HealthAI-Assistant)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/NikhilRaikwar/HealthAI-Assistant)
-![GitHub contributors](https://img.shields.io/github/contributors/NikhilRaikwar/HealthAI-Assistant)
-![GitHub last commit](https://img.shields.io/github/last-commit/NikhilRaikwar/HealthAI-Assistant)
 
 </div>
 
----
 
-## Code of Conduct 📜 
-
-Please be respectful and considerate in all interactions. We are committed to providing a welcoming and inclusive experience for everyone. See our [Code of Conduct](./CONTRIBUTING.md#-code-of-conduct) for details.
 
 ---
 
-## License ⚖️ 
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
 
-### ⭐ **If you like this project, please [star the repo](https://github.com/NikhilRaikwar/HealthAI-Assistant)!** ⭐
-
-**Let's build something amazing together! 🚀**
-
 ---
 
-### 🎃 Happy Hacktoberfest 2025! 🎃
+
 
 **Quality contributions are always welcome!**
 
@@ -546,9 +505,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </a>
 
 ---
-
-*Remember: This application provides AI-powered health information and should not replace professional medical advice. Always consult healthcare professionals for medical concerns.*
-
-**Made with ❤️ by the HealthAI Assistant Community**
 
 </div>
